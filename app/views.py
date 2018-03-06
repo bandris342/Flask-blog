@@ -28,7 +28,7 @@ def addpost():
 		description = request.form['description']
 		post = Articles(title=title, description=description)
 		db.session.add(post)
-		db.session.commit() 
+		db.session.commit()
 		return render_template('detail.html', article=post)
 
 @app.route('/delete/<int:post_id>', methods=['GET'])

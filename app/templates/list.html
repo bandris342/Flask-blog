@@ -5,11 +5,12 @@
 
  {% for article in articles %}
       <h1>{{ article.title }}</h1>
-      <p>{{ article.description }}</p>
+      <p>{{ article.description|truncate(80) }}</p>
         <div>
           <span class="badge badge-success">Posted at {{ article.created_at }}</span>
         </div>
-      <a href="">Read more</a>
+      <br>
+          <a href="{{ url_for('detail', post_id=article.id) }}">Read more</a>
       <hr>
  {% endfor %}
 
