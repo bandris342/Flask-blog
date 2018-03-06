@@ -24,15 +24,15 @@
                 <div class="container">
                     <ul class="nav">
                         <li>
-                            <a href="#">Home</a>
+                            <a href="{{ url_for('index') }}">Home</a>
                         </li>
 
                         <li>
-                            <a href="#">List of articles</a>
+                            <a href="{{ url_for('list') }}">List of articles</a>
                         </li>
 
                         <li>
-                            <a href="#">Create a new article</a>
+                            <a href="{{ url_for('create') }}">Create a new article</a>
                         </li>
 
                     </ul>
