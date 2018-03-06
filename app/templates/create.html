@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<form name="addForm" id="addForm" method="POST" action="{{ url_for('addpost') }}" novalidate>
+
+    <div class="control-group">
+	<div class="form-group floating-label-form-group controls">
+		<label>Title</label>
+		<input type="text" class="form-control" placeholder="Title" name="title" id="title" required data-validation-required-message="Please enter the title of your post.">
+		<p class="help-block text-danger"></p>
+	</div>
+	</div>
+
+
+	<div class="control-group">
+	<div class="form-group floating-label-form-group controls">
+		<label>Description</label>
+		<textarea rows="10" class="form-control" placeholder="Post content" name="description"  id="description" required data-validation-required-message="Please type your content here."></textarea>
+		<p class="help-block text-danger"></p>
+	</div>
+	</div>
+	<br>
+	<div id="success"></div>
+	<div class="form-group">
+	<button type="submit" class="btn btn-primary" id="sendMessageButton">Submit Post</button>
+	<br><br>
+	</div>
+	</form>
+
+
+{% endblock content %}

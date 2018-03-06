@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ {% for article in articles %}
+      <h1>{{ article.title }}</h1>
+      <p>{{ article.description }}</p>
+        <div>
+          <span class="badge badge-success">Posted at {{ article.created_at }}</span>
+        </div>
+      <a href="">Read more</a>
+      <hr>
+ {% endfor %}
+
+{% endblock %}

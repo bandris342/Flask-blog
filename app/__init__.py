@@ -1,12 +1,10 @@
-#################
-#### imports ####
-#################
 from flask import Flask
-
-################
-#### config ####
-################
+from app.models import db
 
 app = Flask(__name__)
-from . import views
+app.config.from_object('config')
 
+db.init_app(app)
+db.create_all(app=app)
+
+from app import views
