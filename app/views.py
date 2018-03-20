@@ -18,19 +18,22 @@ def detail(post_id):
 	return render_template('detail.html', article = article)
 
 @app.route('/create', methods=['GET'])
+@login_required
 def create():
 	return render_template('create.html')
 
 @app.route('/addpost', methods=['POST'])
+@login_required
 def addpost():
 		title = request.form['title']
 		description = request.form['description']
-		post = Articles(title=title, description=description)
+		post = Articles(title=title, description=description, author_id=current_user.get_id())
 		db.session.add(post)
 		db.session.commit()
 		return render_template('detail.html', article=post)
 
 @app.route('/delete/<int:post_id>', methods=['GET'])
+@login_required
 def delete(post_id):
 	post = Articles.query.filter_by(id=post_id).first()
 	db.session.delete(post)
@@ -43,6 +46,9 @@ def register():
 	if request.method == 'GET':
 		return render_template('register.html')
 	user = User(username=request.form['username'], password=request.form['password'])
+	if db.session.query(User.id).filter_by(username=user.username).scalar() is not None:
+		flash('Username already exists', 'error')
+		return redirect(url_for('register'))
 	db.session.add(user)
 	db.session.commit()
 	flash('User successfully registered')
@@ -60,10 +66,10 @@ def login():
         flash('Username or Password is invalid' , 'error')
         return redirect(url_for('login'))
     login_user(registered_user)
-    flash('Logged in successfully')
     return redirect(request.args.get('next') or url_for('index'))
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
