@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_user , logout_user , current_user , login_required
 from app.models import Articles, db, User
 from app import app
@@ -73,6 +73,23 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/api/posts', methods=['GET'])
+def get_all_post():
+
+    posts = Articles.query.all()
+
+    output = []
+
+    for post in posts:
+        user_post = {}
+        user_post['title'] = post.title
+        user_post['description'] = post.description
+        user_post['created_at'] = post.created_at
+        user_post['author_id'] = post.author_id
+        output.append(user_post)
+
+    return jsonify({'posts' : output})
 
 
 

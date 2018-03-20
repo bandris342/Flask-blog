@@ -6,7 +6,7 @@ db = SQLAlchemy()
 class Articles(db.Model):
     __tablename__ = "Articles"
     id = db.Column('article_id', db.Integer, primary_key=True, autoincrement=True)
-    author_id = db.Column('author', db.Integer, db.ForeignKey('User.id'))
+    author_id = db.Column('author_id', db.Integer, db.ForeignKey('users.user_id'))
     title = db.Column('title', db.String(300))
     description = db.Column('description', db.String(1000))
     created_at = db.Column('created_at', db.DateTime, default=db.func.current_timestamp())
